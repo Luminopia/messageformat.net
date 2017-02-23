@@ -73,8 +73,8 @@ namespace Jeffijoe.MessageFormat.Formatting
                     {
                         foundExtension = false;
                         result.Add(new FormatterExtension(extension.ToString(), value.ToString()));
-                        extension.Clear();
-                        value.Clear();
+                        extension = new StringBuilder();
+                        value = new StringBuilder();
                         index = i;
                         continue;
                     }
@@ -191,8 +191,8 @@ namespace Jeffijoe.MessageFormat.Formatting
                     if (braceBalance == 0)
                     {
                         result.Add(new KeyedBlock(key.ToString(), block.ToString()));
-                        block.Clear();
-                        key.Clear();
+                        block = new StringBuilder();
+                        key = new StringBuilder();
                         foundWhitespaceAfterKey = false;
                         continue;
                     }

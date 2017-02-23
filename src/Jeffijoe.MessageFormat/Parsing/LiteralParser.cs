@@ -90,7 +90,7 @@ namespace Jeffijoe.MessageFormat.Parsing
                             start = i;
                             startColumnNumber = columnNumber;
                             startLineNumber = lineNumber;
-                            matchTextBuf.Clear();
+                            matchTextBuf = new StringBuilder();
                         }
                     }
                 }

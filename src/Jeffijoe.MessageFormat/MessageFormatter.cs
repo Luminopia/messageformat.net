@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 
@@ -41,7 +40,7 @@ namespace Jeffijoe.MessageFormat
         ///     Pattern cache. If enabled, should speed up formatting the same pattern multiple times,
         ///     regardless of arguments.
         /// </summary>
-        private readonly ConcurrentDictionary<string, IFormatterRequestCollection> cache;
+        private readonly Dictionary<string, IFormatterRequestCollection> cache;
 
         /// <summary>
         ///     The formatter library.
@@ -107,7 +106,7 @@ namespace Jeffijoe.MessageFormat
             this.Locale = locale;
             if (useCache)
             {
-                this.cache = new ConcurrentDictionary<string, IFormatterRequestCollection>();
+                this.cache = new Dictionary<string, IFormatterRequestCollection>();
             }
         }
 
@@ -385,7 +384,12 @@ namespace Jeffijoe.MessageFormat
             var requests = this.patternParser.Parse(sourceBuilder);
             if (this.cache != null)
             {
-                this.cache.TryAdd(pattern, requests.Clone());
+                try {
+                    this.cache.Add(pattern, requests.Clone());
+                } catch {
+                    
+                }
+
             }
 
             return requests;

@@ -27,21 +27,10 @@ namespace Jeffijoe.MessageFormat.Helpers
         /// </returns>
         internal static IEnumerable<PropertyInfo> GetProperties(object obj)
         {
-            var properties = new List<PropertyInfo>();
             var type = obj.GetType();
-            var typeInfo = type.GetTypeInfo();
-            while (typeInfo != null)
-            {
-                properties.AddRange(typeInfo.DeclaredProperties);
-                if (typeInfo.BaseType == null)
-                {
-                    break;
-                }
+            var properties = type.GetProperties();
 
-                typeInfo = typeInfo.BaseType.GetTypeInfo();
-            }
-
-            return properties;
+            return new List<PropertyInfo>(properties);
         }
 
         /// <summary>
@@ -61,7 +50,7 @@ namespace Jeffijoe.MessageFormat.Helpers
             var result = new Dictionary<string, object>();
             foreach (var propertyInfo in properties)
             {
-                result[propertyInfo.Name] = propertyInfo.GetValue(obj);
+                result[propertyInfo.Name] = propertyInfo.GetValue(obj, null);
             }
 
             return result;

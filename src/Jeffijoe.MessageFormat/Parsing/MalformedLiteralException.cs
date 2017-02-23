@@ -95,7 +95,7 @@ namespace Jeffijoe.MessageFormat.Parsing
                 str = string.Format("{0}\r\nLine {1}, column {2}", message, lineNumber, columnNumber);
             }
 
-            if (string.IsNullOrWhiteSpace(sourceSnippet))
+            if (string.IsNullOrEmpty(sourceSnippet))
             {
                 return str;
             }
